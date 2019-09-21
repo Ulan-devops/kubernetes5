@@ -17,6 +17,7 @@ spec:
     volumeMounts:
     - mountPath: "/data"
       name: "kuard-data"
+      readOnly: false
     ports:
     - containerPort: 8080
       name: http
