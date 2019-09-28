@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubernetes.io/change-cause: "Inititial revision"
+  labels:
+    run: web-app-deployment
+  name: web-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: web-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  revisionHistoryLimit: 10
+  template:
+    metadata:
+      labels:
+        run: web-app
+    spec:
+      containers:
+      - image: ikambarov/web-app:1.0.1
+        name: web-app
